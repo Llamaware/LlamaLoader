@@ -2,7 +2,7 @@
 
 ![preview](/img/preview.png)
 
-An all-in-one auto-updater and installer for the [Tomb modloader](https://codeberg.org/basil/tomb) and [Llamaware](https://llamawa.re/) mod repository. Previously known as AutoTomb.
+A mod management tool, all-in-one auto-updater and installer for the [Tomb modloader](https://codeberg.org/basil/tomb) and [Llamaware](https://llamawa.re/) mod repository. Previously known as AutoTomb.
 
 ### Features
 
@@ -16,9 +16,9 @@ An all-in-one auto-updater and installer for the [Tomb modloader](https://codebe
 
 ### Usage
 
-The GUI should be self-explanatory.
-Launch the program.
-Find/select your game directory, install/update Tomb, then from the Mods tab, install/update the mods you want.
+The GUI should be self-explanatory.  
+Launch the program.  
+Find/select your game directory, install/update Tomb, then from the Mods tab, install/update the mods you want.  
 Don't change the URLs or else it won't work.
 
 ### Requirements
@@ -36,5 +36,5 @@ Don't change the URLs or else it won't work.
 
 ### License
 
-LlamaLoader is licensed under the Tumbolia Public License.
+LlamaLoader is licensed under the Tumbolia Public License.  
 Tomb is licensed under the MIT License.
