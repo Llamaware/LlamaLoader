@@ -1,5 +1,7 @@
 # AutoTomb
 
+![preview](/img/preview.png)
+
 An auto-updater and installer for the [Tomb modloader](https://codeberg.org/basil/tomb).
 
 ### Features
