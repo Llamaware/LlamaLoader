@@ -169,7 +169,7 @@ namespace autotomb
             string modFolder = Path.Combine(gameDirectory, "tomb", "mods");
             if (!Directory.Exists(modFolder))
             {
-                Console.WriteLine("Error: mods folder not found. Is Tomb not installed? Stopping.");
+                textBox1.AppendText("Error: mods folder not found. Is Tomb not installed? Stopping.");
                 return;
             }
             var selectedMods = checkedListBox1.CheckedItems.Cast<string>().ToList();
