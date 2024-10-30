@@ -1,4 +1,4 @@
-namespace autotomb
+namespace LlamaLoader
 {
     internal static class Program
     {

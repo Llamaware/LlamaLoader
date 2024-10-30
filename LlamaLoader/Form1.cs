@@ -1,9 +1,6 @@
-using System.IO.Packaging;
-using System.IO;
 using static ModUpdater;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace autotomb
+namespace LlamaLoader
 {
     public partial class Form1 : Form
     {
@@ -110,6 +107,7 @@ namespace autotomb
             if (indexUpdateResult == 1)
             {
                 textBox1.AppendText("Updated main to tomb/index.html" + Environment.NewLine);
+                textBox1.AppendText("Modloader installation complete!" + Environment.NewLine);
             }
             else if (indexUpdateResult == -1)
             {
@@ -119,8 +117,8 @@ namespace autotomb
             else
             {
                 textBox1.AppendText("Tomb was already installed, no changes necessary." + Environment.NewLine);
+                textBox1.AppendText("Modloader update complete!" + Environment.NewLine);
             }
-            textBox1.AppendText("Update complete!" + Environment.NewLine);
         }
 
         private List<Mod> mods = new List<Mod>();
@@ -216,6 +214,8 @@ namespace autotomb
             string gameDirectory = textBox2.Text;
             string nwjsUrl = textBox6.Text;
             string greenworksUrl = textBox7.Text;
+            string steamapiUrl = textBox12.Text;
+            string appticketUrl = textBox13.Text;
             if (!Directory.Exists(gameDirectory))
             {
                 textBox1.AppendText("Error: No game directory selected or nonexistent directory. Stopping." + Environment.NewLine);
@@ -231,8 +231,18 @@ namespace autotomb
                 textBox1.AppendText("Error: Invalid Greenworks URL. Stopping." + Environment.NewLine);
                 return;
             }
+            if (string.IsNullOrEmpty(steamapiUrl))
+            {
+                textBox1.AppendText("Error: Invalid steam_api.dll URL. Stopping." + Environment.NewLine);
+                return;
+            }
+            if (string.IsNullOrEmpty(appticketUrl))
+            {
+                textBox1.AppendText("Error: Invalid sdkencryptedappticket.dll URL. Stopping." + Environment.NewLine);
+                return;
+            }
             disableAllButtons();
-            textBox1.AppendText("Downloading and installing NW.js. This will take a while, please be patient..." + Environment.NewLine);
+            textBox1.AppendText("Downloading and installing NW.js (32-bit). This will take a while, please be patient..." + Environment.NewLine);
             textBox1.AppendText("Closing the program during this operation may result in corruption of the game files!" + Environment.NewLine);
             int installNwjsResult = await NwjsUpdater.DownloadAndExtractNwjsAsync(nwjsUrl, gameDirectory);
             if (installNwjsResult == 0)
@@ -256,7 +266,7 @@ namespace autotomb
                 textBox1.AppendText("Error: Failed to move nw.exe to Game.exe. You may need to launch the game manually using nw.exe. Attempting to continue..." + Environment.NewLine);
                 errors = true;
             }
-            textBox1.AppendText("Installing matching version of Greenworks..." + Environment.NewLine);
+            textBox1.AppendText("Installing matching 32-bit version of Greenworks..." + Environment.NewLine);
             string greenworksDirectory = Path.Combine(gameDirectory, "www", "greenworks");
             int installGreenworksResult = await TombUpdater.DownloadAndExtractZipAsync(greenworksUrl, greenworksDirectory);
             if (installGreenworksResult == 0)
@@ -269,15 +279,39 @@ namespace autotomb
                 textBox1.AppendText("Install Greenworks manually, or re-install your game and try again." + Environment.NewLine);
                 errors = true;
             }
-            enableAllButtons();
-            if (!errors)
+            textBox1.AppendText("Installing 32-bit Steam DLLs..." + Environment.NewLine);
+            string greenworksLibDirectory = Path.Combine(greenworksDirectory, "lib");
+            int installSteamapiResult = await ModUpdater.DownloadAndSaveModAsync(steamapiUrl, greenworksLibDirectory);
+            if (installSteamapiResult == 0)
             {
-                textBox1.AppendText("NW.js upgrade complete!" + Environment.NewLine);
+                textBox1.AppendText("steam_api.dll installed to lib." + Environment.NewLine);
             }
             else
             {
-                textBox1.AppendText("Operation completed, but one or more errors occurred. The game might not launch!" + Environment.NewLine);
+                textBox1.AppendText("Error: Failed to download or install steam_api.dll." + Environment.NewLine);
+                textBox1.AppendText("Install steam_api.dll manually, or re-install your game and try again, making sure the URLs are valid." + Environment.NewLine);
+                errors = true;
             }
+            int installAppticketResult = await ModUpdater.DownloadAndSaveModAsync(appticketUrl, greenworksLibDirectory);
+            if (installAppticketResult == 0)
+            {
+                textBox1.AppendText("sdkencryptedappticket.dll installed to lib." + Environment.NewLine);
+            }
+            else
+            {
+                textBox1.AppendText("Error: Failed to download or install sdkencryptedappticket.dll." + Environment.NewLine);
+                textBox1.AppendText("Install sdkencryptedappticket.dll manually, or re-install your game and try again, making sure the URLs are valid." + Environment.NewLine);
+                errors = true;
+            }
+            if (!errors)
+            {
+                textBox1.AppendText("NW.js (32-bit) upgrade complete!" + Environment.NewLine);
+            }
+            else
+            {
+                textBox1.AppendText("NW.js (32-bit) upgrade completed with one or more errors. The game might not launch!" + Environment.NewLine);
+            }
+            enableAllButtons();
         }
 
         private async void button7_Click(object sender, EventArgs e)
@@ -305,7 +339,7 @@ namespace autotomb
             }
             if (string.IsNullOrEmpty(steamapiUrl))
             {
-                textBox1.AppendText("Error: Invalid steamapi64.dll URL. Stopping." + Environment.NewLine);
+                textBox1.AppendText("Error: Invalid steam_api64.dll URL. Stopping." + Environment.NewLine);
                 return;
             }
             if (string.IsNullOrEmpty(appticketUrl))
@@ -314,7 +348,7 @@ namespace autotomb
                 return;
             }
             disableAllButtons();
-            textBox1.AppendText("Downloading and installing NW.js. This will take a while, please be patient..." + Environment.NewLine);
+            textBox1.AppendText("Downloading and installing NW.js (64-bit). This will take a while, please be patient..." + Environment.NewLine);
             textBox1.AppendText("Closing the program during this operation may result in corruption of the game files!" + Environment.NewLine);
             int installNwjsResult = await NwjsUpdater.DownloadAndExtractNwjsAsync(nwjsUrl, gameDirectory);
             if (installNwjsResult == 0)
@@ -338,7 +372,7 @@ namespace autotomb
                 textBox1.AppendText("Error: Failed to move nw.exe to Game.exe. You may need to launch the game manually using nw.exe. Attempting to continue..." + Environment.NewLine);
                 errors = true;
             }
-            textBox1.AppendText("Installing matching version of Greenworks..." + Environment.NewLine);
+            textBox1.AppendText("Installing matching 64-bit version of Greenworks..." + Environment.NewLine);
             string greenworksDirectory = Path.Combine(gameDirectory, "www", "greenworks");
             int installGreenworksResult = await TombUpdater.DownloadAndExtractZipAsync(greenworksUrl, greenworksDirectory);
             if (installGreenworksResult == 0)
@@ -356,12 +390,12 @@ namespace autotomb
             int installSteamapiResult = await ModUpdater.DownloadAndSaveModAsync(steamapiUrl, greenworksLibDirectory);
             if (installSteamapiResult == 0)
             {
-                textBox1.AppendText("steamapi64.dll installed to lib." + Environment.NewLine);
+                textBox1.AppendText("steam_api64.dll installed to lib." + Environment.NewLine);
             }
             else
             {
-                textBox1.AppendText("Error: Failed to download or install steamapi64.dll. Attempting to continue..." + Environment.NewLine);
-                textBox1.AppendText("Install steamapi64.dll manually, or re-install your game and try again, making sure the URLs are valid. Attempting to continue..." + Environment.NewLine);
+                textBox1.AppendText("Error: Failed to download or install steam_api64.dll." + Environment.NewLine);
+                textBox1.AppendText("Install steam_api64.dll manually, or re-install your game and try again, making sure the URLs are valid. Attempting to continue..." + Environment.NewLine);
                 errors = true;
             }
 
@@ -376,15 +410,15 @@ namespace autotomb
                 textBox1.AppendText("Install sdkencryptedappticket64.dll manually, or re-install your game and try again, making sure the URLs are valid." + Environment.NewLine);
                 errors = true;
             }
-            enableAllButtons();
             if (!errors)
             {
-                textBox1.AppendText("NW.js upgrade complete!" + Environment.NewLine);
+                textBox1.AppendText("NW.js (64-bit) upgrade complete!" + Environment.NewLine);
             }
             else
             {
-                textBox1.AppendText("Operation completed, but one or more errors occurred. The game might not launch!" + Environment.NewLine);
+                textBox1.AppendText("NW.js (64-bit) upgrade completed with one or more errors. The game might not launch!" + Environment.NewLine);
             }
+            enableAllButtons();
         }
     }
 }

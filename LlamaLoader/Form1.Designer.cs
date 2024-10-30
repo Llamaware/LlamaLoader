@@ -1,4 +1,4 @@
-﻿namespace autotomb
+﻿namespace LlamaLoader
 {
     partial class Form1
     {
@@ -51,6 +51,10 @@
             tabPage3 = new TabPage();
             button6 = new Button();
             groupBox3 = new GroupBox();
+            textBox13 = new TextBox();
+            label13 = new Label();
+            textBox12 = new TextBox();
+            label12 = new Label();
             label6 = new Label();
             label5 = new Label();
             label4 = new Label();
@@ -88,6 +92,7 @@
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
             textBox1.ReadOnly = true;
+            textBox1.ScrollBars = ScrollBars.Vertical;
             textBox1.Size = new Size(788, 157);
             textBox1.TabIndex = 0;
             // 
@@ -299,6 +304,10 @@
             // 
             // groupBox3
             // 
+            groupBox3.Controls.Add(textBox13);
+            groupBox3.Controls.Add(label13);
+            groupBox3.Controls.Add(textBox12);
+            groupBox3.Controls.Add(label12);
             groupBox3.Controls.Add(label6);
             groupBox3.Controls.Add(label5);
             groupBox3.Controls.Add(label4);
@@ -310,6 +319,40 @@
             groupBox3.TabIndex = 0;
             groupBox3.TabStop = false;
             groupBox3.Text = "Options";
+            // 
+            // textBox13
+            // 
+            textBox13.Location = new Point(210, 109);
+            textBox13.Name = "textBox13";
+            textBox13.Size = new Size(508, 23);
+            textBox13.TabIndex = 8;
+            textBox13.Text = "https://github.com/rlabrecque/SteamworksSDK/raw/refs/heads/main/public/steam/lib/win32/sdkencryptedappticket.dll";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(37, 112);
+            label13.Name = "label13";
+            label13.Size = new Size(167, 15);
+            label13.TabIndex = 7;
+            label13.Text = "sdkencryptedappticket.dll URL";
+            // 
+            // textBox12
+            // 
+            textBox12.Location = new Point(210, 80);
+            textBox12.Name = "textBox12";
+            textBox12.Size = new Size(508, 23);
+            textBox12.TabIndex = 6;
+            textBox12.Text = "https://github.com/rlabrecque/SteamworksSDK/raw/refs/heads/main/redistributable_bin/steam_api.dll";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(104, 83);
+            label12.Name = "label12";
+            label12.Size = new Size(100, 15);
+            label12.TabIndex = 5;
+            label12.Text = "steam_api.dll URL";
             // 
             // label6
             // 
@@ -324,7 +367,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(44, 89);
+            label5.Location = new Point(111, 54);
             label5.Name = "label5";
             label5.Size = new Size(93, 15);
             label5.TabIndex = 3;
@@ -333,7 +376,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(75, 37);
+            label4.Location = new Point(142, 25);
             label4.Name = "label4";
             label4.Size = new Size(62, 15);
             label4.TabIndex = 2;
@@ -341,17 +384,17 @@
             // 
             // textBox7
             // 
-            textBox7.Location = new Point(143, 86);
+            textBox7.Location = new Point(210, 51);
             textBox7.Name = "textBox7";
-            textBox7.Size = new Size(572, 23);
+            textBox7.Size = new Size(508, 23);
             textBox7.TabIndex = 1;
             textBox7.Text = "https://github.com/greenheartgames/greenworks/releases/download/v0.18.0/greenworks-v0.18.0-nw-v0.92.0-win-32.zip";
             // 
             // textBox6
             // 
-            textBox6.Location = new Point(143, 34);
+            textBox6.Location = new Point(210, 22);
             textBox6.Name = "textBox6";
-            textBox6.Size = new Size(572, 23);
+            textBox6.Size = new Size(508, 23);
             textBox6.TabIndex = 0;
             textBox6.Text = "https://dl.nwjs.io/v0.92.0/nwjs-sdk-v0.92.0-win-ia32.zip";
             // 
@@ -416,11 +459,11 @@
             // label9
             // 
             label9.AutoSize = true;
-            label9.Location = new Point(97, 83);
+            label9.Location = new Point(92, 83);
             label9.Name = "label9";
-            label9.Size = new Size(107, 15);
+            label9.Size = new Size(112, 15);
             label9.TabIndex = 6;
-            label9.Text = "steamapi64.dll URL";
+            label9.Text = "steam_api64.dll URL";
             // 
             // label8
             // 
@@ -540,5 +583,9 @@
         private TextBox textBox11;
         private TextBox textBox10;
         private Label label11;
+        private TextBox textBox12;
+        private Label label12;
+        private Label label13;
+        private TextBox textBox13;
     }
 }
