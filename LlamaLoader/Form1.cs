@@ -153,8 +153,7 @@ namespace autotomb
                 var modsToInstall = mods.Where(mod => selectedMods.Contains(mod.Name)).ToList();
 
                 // Trigger the installation process
-                string modDirectory = Path.Combine(gameDirectory, "mods");
-                int installResult = await ModUpdater.InstallMods(modsToInstall, modDirectory);
+                int installResult = await ModUpdater.InstallMods(modsToInstall, modFolder);
                 if (installResult == 0)
                 {
                     textBox1.AppendText("Mods installed: ");
