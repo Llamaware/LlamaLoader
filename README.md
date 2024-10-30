@@ -2,7 +2,7 @@
 
 ![preview](/img/preview.png)
 
-A mod management tool, all-in-one auto-updater and installer for the [Tomb modloader](https://codeberg.org/basil/tomb) and [Llamaware](https://llamawa.re/) mod repository. Previously known as AutoTomb.
+A mod management tool, all-in-one auto-updater and installer for the [Tomb modloader](https://codeberg.org/basil/tomb) and [Llamaware](https://llamawa.re/) mod repository.
 
 ### Features
 
@@ -18,8 +18,8 @@ A mod management tool, all-in-one auto-updater and installer for the [Tomb modlo
 ### Usage
 
 Launch the program.  
-Find/select your game directory then install/update Tomb.  
-From the `Get Mods` tab, install/update the mods you want.  
+Find/select your game directory, then install/update Tomb.  
+From the `Get Mods` tab, load the mod list, then install/update the mods you want.  
 Don't change the URLs or else it won't work.
 
 ### Requirements
@@ -31,7 +31,7 @@ Don't change the URLs or else it won't work.
 
 - Mod uninstallation.
 - Multiplatform? (will require a complete rewrite)
-- Use APIs instead of HTML parsing?
+- Use APIs instead of HTML parsing.
 - More verbose logging.
 - There probably still won't be any safety features. Just don't be stupid while using it.
 
