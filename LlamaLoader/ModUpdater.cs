@@ -77,14 +77,11 @@ public class ModUpdater
         return mods;
     }
 
-    // Dummy installation method for demonstration
     public static async Task<int> InstallMods(List<Mod> modsToInstall, string modDirectory)
     {
         int result = 0;
         foreach (var mod in modsToInstall)
         {
-            Console.WriteLine($"Installing {mod.Name} {mod.Version}");
-            // Add actual installation logic here
             int downloadModResult = await DownloadAndSaveModAsync(mod.Url, modDirectory);
             if (downloadModResult != 0)
             {
@@ -99,13 +96,11 @@ public class ModUpdater
         // Validate the URL and save directory
         if (string.IsNullOrWhiteSpace(modUrl))
         {
-            Console.WriteLine("Invalid mod URL.");
             return -1;
         }
 
-        if (string.IsNullOrWhiteSpace(saveDirectory))
+        if (!Directory.Exists(saveDirectory))
         {
-            Console.WriteLine("Invalid save directory.");
             return -2;
         }
 
@@ -114,7 +109,6 @@ public class ModUpdater
             using (HttpClient client = new HttpClient())
             {
                 // Start the download
-                Console.WriteLine("Downloading mod from: " + modUrl);
                 byte[] modData = await client.GetByteArrayAsync(modUrl);
 
                 // Determine the file name from the URL
@@ -123,7 +117,6 @@ public class ModUpdater
 
                 // Save the file
                 await File.WriteAllBytesAsync(filePath, modData);
-                Console.WriteLine($"Mod downloaded and saved to: {filePath}");
                 return 0;
             }
         }

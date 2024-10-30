@@ -9,6 +9,7 @@ A mod management tool, all-in-one auto-updater and installer for the [Tomb modlo
 - **Attempts** to find your game directory.
 - **Automatically** installs and updates Tomb.
 - **Automatically** installs and updates selected Tomb-compatible mods.
+- **Update** the game engine (NW.js) to a newer SDK-enabled build. (Experimental feature, use with caution!)
 - A **not-so-pretty** but easy-to-use GUI.
 - **Fake** console logging.
 - Basically **zero QA testing**, so don't try putting gibberish into the input boxes.
@@ -16,9 +17,9 @@ A mod management tool, all-in-one auto-updater and installer for the [Tomb modlo
 
 ### Usage
 
-The GUI should be self-explanatory.  
 Launch the program.  
-Find/select your game directory, install/update Tomb, then from the Mods tab, install/update the mods you want.  
+Find/select your game directory then install/update Tomb.  
+From the `Get Mods` tab, install/update the mods you want.  
 Don't change the URLs or else it won't work.
 
 ### Requirements
@@ -37,4 +38,5 @@ Don't change the URLs or else it won't work.
 ### License
 
 LlamaLoader is licensed under the Tumbolia Public License.  
-Tomb is licensed under the MIT License.
+Tomb is licensed under the MIT License.  
+[AngleSharp](https://github.com/AngleSharp/AngleSharp) is licensed under the MIT License.

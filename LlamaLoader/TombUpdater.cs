@@ -84,7 +84,7 @@ public class TombUpdater
                 }
             }
         }
-        return 1;
+        return 0;
     }
 
     public static async Task<int> UpdateMainFieldInPackageJson(string gameDirectory)
@@ -92,7 +92,6 @@ public class TombUpdater
         string packageJsonPath = Path.Combine(gameDirectory, "package.json");
         if (!File.Exists(packageJsonPath))
         {
-            Console.WriteLine("package.json not found at specified path.");
             return -1;
         }
 
