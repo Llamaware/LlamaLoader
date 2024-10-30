@@ -72,6 +72,12 @@
             textBox9 = new TextBox();
             textBox8 = new TextBox();
             label7 = new Label();
+            tabPage5 = new TabPage();
+            button8 = new Button();
+            groupBox5 = new GroupBox();
+            button9 = new Button();
+            label14 = new Label();
+            textBox14 = new TextBox();
             groupBox1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -81,6 +87,8 @@
             groupBox3.SuspendLayout();
             tabPage4.SuspendLayout();
             groupBox4.SuspendLayout();
+            tabPage5.SuspendLayout();
+            groupBox5.SuspendLayout();
             SuspendLayout();
             // 
             // textBox1
@@ -179,6 +187,7 @@
             tabControl1.Controls.Add(tabPage2);
             tabControl1.Controls.Add(tabPage3);
             tabControl1.Controls.Add(tabPage4);
+            tabControl1.Controls.Add(tabPage5);
             tabControl1.Location = new Point(7, 175);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -515,6 +524,66 @@
             label7.TabIndex = 0;
             label7.Text = "NW.js URL";
             // 
+            // tabPage5
+            // 
+            tabPage5.Controls.Add(button8);
+            tabPage5.Controls.Add(groupBox5);
+            tabPage5.Location = new Point(4, 24);
+            tabPage5.Name = "tabPage5";
+            tabPage5.Padding = new Padding(3);
+            tabPage5.Size = new Size(780, 235);
+            tabPage5.TabIndex = 4;
+            tabPage5.Text = "Decrypt";
+            tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // button8
+            // 
+            button8.Location = new Point(290, 180);
+            button8.Name = "button8";
+            button8.Size = new Size(190, 40);
+            button8.TabIndex = 1;
+            button8.Text = "Decrypt Assets";
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += button8_Click;
+            // 
+            // groupBox5
+            // 
+            groupBox5.Controls.Add(button9);
+            groupBox5.Controls.Add(label14);
+            groupBox5.Controls.Add(textBox14);
+            groupBox5.Location = new Point(6, 3);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new Size(768, 169);
+            groupBox5.TabIndex = 0;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "Options";
+            // 
+            // button9
+            // 
+            button9.Location = new Point(651, 68);
+            button9.Name = "button9";
+            button9.Size = new Size(75, 23);
+            button9.TabIndex = 2;
+            button9.Text = "Browse";
+            button9.UseVisualStyleBackColor = true;
+            button9.Click += button9_Click;
+            // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(43, 72);
+            label14.Name = "label14";
+            label14.Size = new Size(96, 15);
+            label14.TabIndex = 1;
+            label14.Text = "Output Directory";
+            // 
+            // textBox14
+            // 
+            textBox14.Location = new Point(156, 69);
+            textBox14.Name = "textBox14";
+            textBox14.Size = new Size(469, 23);
+            textBox14.TabIndex = 0;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -538,6 +607,9 @@
             tabPage4.ResumeLayout(false);
             groupBox4.ResumeLayout(false);
             groupBox4.PerformLayout();
+            tabPage5.ResumeLayout(false);
+            groupBox5.ResumeLayout(false);
+            groupBox5.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -587,5 +659,11 @@
         private Label label12;
         private Label label13;
         private TextBox textBox13;
+        private TabPage tabPage5;
+        private GroupBox groupBox5;
+        private Label label14;
+        private TextBox textBox14;
+        private Button button8;
+        private Button button9;
     }
 }

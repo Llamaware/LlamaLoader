@@ -10,6 +10,7 @@ A mod management tool, all-in-one auto-updater and installer for the [Tomb modlo
 - **Automatically** installs and updates Tomb.
 - **Automatically** installs and updates selected Tomb-compatible mods.
 - **Update** the game engine (NW.js) to a newer SDK-enabled build. (Experimental feature, use with caution!)
+- **Decrypt** the game assets. (We're [beating](https://github.com/Llamaware/LlamaToolkit) a [dead](https://codeberg.org/basil/grimoire) [horse](https://github.com/kleineluka/burial) here.)
 - A **not-so-pretty** but easy-to-use GUI.
 - **Fake** console logging.
 - Basically **zero QA testing**, so don't try putting gibberish into the input boxes.
@@ -17,10 +18,10 @@ A mod management tool, all-in-one auto-updater and installer for the [Tomb modlo
 
 ### Usage
 
-Launch the program.  
-Find/select your game directory, then install/update Tomb.  
-From the `Get Mods` tab, load the mod list, then install/update the mods you want.  
-Don't change the URLs or else it won't work.
+- Launch the program.
+- Find/select your game directory, then install/update Tomb.
+- From the `Get Mods` tab, load the mod list, then install/update the mods you want.
+- Don't change the URLs or else it won't work.
 
 ### Requirements
 

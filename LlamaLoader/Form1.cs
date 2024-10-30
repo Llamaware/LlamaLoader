@@ -1,4 +1,5 @@
 using static ModUpdater;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LlamaLoader
 {
@@ -18,6 +19,7 @@ namespace LlamaLoader
             button5.Enabled = false;
             button6.Enabled = false;
             button7.Enabled = false;
+            button8.Enabled = false;
         }
 
         private void enableAllButtons()
@@ -29,6 +31,7 @@ namespace LlamaLoader
             button5.Enabled = true;
             button6.Enabled = true;
             button7.Enabled = true;
+            button8.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -38,6 +41,7 @@ namespace LlamaLoader
             if (dlg.ShowDialog(button1.Handle) == true)
             {
                 textBox2.Text = dlg.ResultPath;
+                textBox14.Text = Path.Combine(dlg.ResultPath, "decrypted");
             }
         }
 
@@ -49,6 +53,7 @@ namespace LlamaLoader
             {
                 textBox1.AppendText("Detected game directory at: " + gameDirectory + Environment.NewLine);
                 textBox2.Text = gameDirectory;
+                textBox14.Text = Path.Combine(gameDirectory, "decrypted");
             }
             else
             {
@@ -419,6 +424,42 @@ namespace LlamaLoader
                 textBox1.AppendText("NW.js (64-bit) upgrade completed with one or more errors. The game might not launch!" + Environment.NewLine);
             }
             enableAllButtons();
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            var dlg = new FolderPicker();
+            dlg.InputPath = @"C:\";
+            if (dlg.ShowDialog(button1.Handle) == true)
+            {
+                textBox14.Text = dlg.ResultPath;
+            }
+        }
+
+        private async void button8_Click(object sender, EventArgs e)
+        {
+            string gameDirectory = textBox2.Text;
+            string outputDirectory = textBox14.Text;
+            if (!Directory.Exists(gameDirectory))
+            {
+                textBox1.AppendText("Error: No game directory selected or nonexistent directory. Stopping." + Environment.NewLine);
+                return;
+            }
+            if (!Directory.Exists(outputDirectory))
+            {
+                textBox1.AppendText("Created new output directory." + Environment.NewLine);
+                Directory.CreateDirectory(outputDirectory);
+            }
+            textBox1.AppendText("Running decryption routine..." + Environment.NewLine);
+            int decryptionResult = await Decryptor.DecryptGame(gameDirectory, outputDirectory);
+            if (decryptionResult == 0)
+            {
+                textBox1.AppendText("All assets decrypted and saved to: " + outputDirectory + Environment.NewLine);
+            }
+            else
+            {
+                textBox1.AppendText("Error: Failed to decrypt the game assets." + Environment.NewLine);
+            }
         }
     }
 }
