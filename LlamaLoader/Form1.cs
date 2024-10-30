@@ -20,6 +20,7 @@ namespace autotomb
             button4.Enabled = false;
             button5.Enabled = false;
             button6.Enabled = false;
+            button7.Enabled = false;
         }
 
         private void enableAllButtons()
@@ -30,6 +31,7 @@ namespace autotomb
             button4.Enabled = true;
             button5.Enabled = true;
             button6.Enabled = true;
+            button7.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)

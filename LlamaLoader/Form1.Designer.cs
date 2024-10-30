@@ -164,7 +164,7 @@
             button3.Name = "button3";
             button3.Size = new Size(190, 40);
             button3.TabIndex = 5;
-            button3.Text = "Update Modloader";
+            button3.Text = "Install/Update Modloader";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button3_Click;
             // 
