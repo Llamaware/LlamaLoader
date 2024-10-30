@@ -56,7 +56,17 @@ namespace autotomb
                 return;
             }
             textBox1.AppendText("Downloading and extracting Tomb to game directory..." + Environment.NewLine);
-            int downloadTombResult = await TombUpdater.DownloadAndExtractZipAsync(newestTombUrlResult, gameDirectory);
+            string tombDirectory = Path.Combine(gameDirectory, "tomb");
+            if (!Directory.Exists(tombDirectory))
+            {
+                textBox1.AppendText("Creating Tomb installation..." + Environment.NewLine);
+                Directory.CreateDirectory(tombDirectory);
+            }
+            else
+            {
+                textBox1.AppendText("Existing Tomb installation found, updating..." + Environment.NewLine);
+            }
+            int downloadTombResult = await TombUpdater.DownloadAndExtractZipAsync(newestTombUrlResult, tombDirectory);
             if (downloadTombResult == 1)
             {
                 textBox1.AppendText("Successfully downloaded and extracted Tomb to the game directory." + Environment.NewLine);
@@ -129,7 +139,7 @@ namespace autotomb
                 textBox1.AppendText("Error: No game directory selected or nonexistent directory. Stopping." + Environment.NewLine);
                 return;
             }
-            string modFolder = Path.Combine(gameDirectory, "mods");
+            string modFolder = Path.Combine(gameDirectory, "tomb", "mods");
             if (!Directory.Exists(modFolder))
             {
                 Console.WriteLine("Error: mods folder not found. Is Tomb not installed? Stopping.");
