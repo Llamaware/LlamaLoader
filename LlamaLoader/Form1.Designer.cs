@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             textBox1 = new TextBox();
             button1 = new Button();
             textBox2 = new TextBox();
@@ -478,6 +479,7 @@
             ClientSize = new Size(800, 450);
             Controls.Add(textBox1);
             Controls.Add(tabControl1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "LlamaLoader";
             groupBox1.ResumeLayout(false);
