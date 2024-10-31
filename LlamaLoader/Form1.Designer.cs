@@ -98,6 +98,27 @@
             textBox17 = new TextBox();
             textBox16 = new TextBox();
             textBox15 = new TextBox();
+            tabPage7 = new TabPage();
+            button18 = new Button();
+            button16 = new Button();
+            button15 = new Button();
+            groupBox7 = new GroupBox();
+            label26 = new Label();
+            button17 = new Button();
+            label25 = new Label();
+            textBox24 = new TextBox();
+            label24 = new Label();
+            textBox23 = new TextBox();
+            checkBox1 = new CheckBox();
+            label23 = new Label();
+            textBox22 = new TextBox();
+            button14 = new Button();
+            label22 = new Label();
+            label21 = new Label();
+            textBox21 = new TextBox();
+            textBox20 = new TextBox();
+            textBox19 = new TextBox();
+            label20 = new Label();
             groupBox1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -111,6 +132,8 @@
             groupBox5.SuspendLayout();
             tabPage6.SuspendLayout();
             groupBox6.SuspendLayout();
+            tabPage7.SuspendLayout();
+            groupBox7.SuspendLayout();
             SuspendLayout();
             // 
             // textBox1
@@ -211,6 +234,7 @@
             tabControl1.Controls.Add(tabPage4);
             tabControl1.Controls.Add(tabPage5);
             tabControl1.Controls.Add(tabPage6);
+            tabControl1.Controls.Add(tabPage7);
             tabControl1.Location = new Point(7, 175);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
@@ -708,7 +732,7 @@
             // radioButton2
             // 
             radioButton2.AutoSize = true;
-            radioButton2.Location = new Point(256, 169);
+            radioButton2.Location = new Point(257, 169);
             radioButton2.Name = "radioButton2";
             radioButton2.Size = new Size(70, 19);
             radioButton2.TabIndex = 11;
@@ -810,6 +834,230 @@
             textBox15.TabIndex = 0;
             textBox15.Text = "https://github.com/echo094/decode-js/archive/refs/heads/main.zip";
             // 
+            // tabPage7
+            // 
+            tabPage7.Controls.Add(button18);
+            tabPage7.Controls.Add(button16);
+            tabPage7.Controls.Add(button15);
+            tabPage7.Controls.Add(groupBox7);
+            tabPage7.Location = new Point(4, 24);
+            tabPage7.Name = "tabPage7";
+            tabPage7.Size = new Size(780, 296);
+            tabPage7.TabIndex = 6;
+            tabPage7.Text = "Extract Code";
+            tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // button18
+            // 
+            button18.Location = new Point(528, 243);
+            button18.Name = "button18";
+            button18.Size = new Size(190, 40);
+            button18.TabIndex = 4;
+            button18.Text = "tcaLazyCracker";
+            button18.UseVisualStyleBackColor = true;
+            button18.Click += button18_Click;
+            // 
+            // button16
+            // 
+            button16.Location = new Point(60, 243);
+            button16.Name = "button16";
+            button16.Size = new Size(190, 40);
+            button16.TabIndex = 3;
+            button16.Text = "Locate Target Plugin";
+            button16.UseVisualStyleBackColor = true;
+            button16.Click += button16_Click;
+            // 
+            // button15
+            // 
+            button15.Location = new Point(296, 243);
+            button15.Name = "button15";
+            button15.Size = new Size(190, 40);
+            button15.TabIndex = 2;
+            button15.Text = "Modify Plugin";
+            button15.UseVisualStyleBackColor = true;
+            button15.Click += button15_Click;
+            // 
+            // groupBox7
+            // 
+            groupBox7.Controls.Add(label26);
+            groupBox7.Controls.Add(button17);
+            groupBox7.Controls.Add(label25);
+            groupBox7.Controls.Add(textBox24);
+            groupBox7.Controls.Add(label24);
+            groupBox7.Controls.Add(textBox23);
+            groupBox7.Controls.Add(checkBox1);
+            groupBox7.Controls.Add(label23);
+            groupBox7.Controls.Add(textBox22);
+            groupBox7.Controls.Add(button14);
+            groupBox7.Controls.Add(label22);
+            groupBox7.Controls.Add(label21);
+            groupBox7.Controls.Add(textBox21);
+            groupBox7.Controls.Add(textBox20);
+            groupBox7.Controls.Add(textBox19);
+            groupBox7.Controls.Add(label20);
+            groupBox7.Location = new Point(6, 3);
+            groupBox7.Name = "groupBox7";
+            groupBox7.Size = new Size(768, 234);
+            groupBox7.TabIndex = 1;
+            groupBox7.TabStop = false;
+            groupBox7.Text = "Options";
+            // 
+            // label26
+            // 
+            label26.AutoSize = true;
+            label26.ForeColor = Color.Red;
+            label26.Location = new Point(39, 179);
+            label26.Name = "label26";
+            label26.Size = new Size(394, 15);
+            label26.TabIndex = 15;
+            label26.Text = "Somehow it seems like a highly questionable idea to edit these variables...";
+            // 
+            // button17
+            // 
+            button17.Location = new Point(358, 29);
+            button17.Name = "button17";
+            button17.Size = new Size(75, 23);
+            button17.TabIndex = 14;
+            button17.Text = "Browse";
+            button17.UseVisualStyleBackColor = true;
+            button17.Click += button17_Click;
+            // 
+            // label25
+            // 
+            label25.AutoSize = true;
+            label25.Location = new Point(13, 61);
+            label25.Name = "label25";
+            label25.Size = new Size(109, 15);
+            label25.TabIndex = 13;
+            label25.Text = "Function Definition";
+            // 
+            // textBox24
+            // 
+            textBox24.BackColor = Color.Black;
+            textBox24.Font = new Font("Cascadia Mono", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox24.ForeColor = Color.White;
+            textBox24.Location = new Point(128, 57);
+            textBox24.Name = "textBox24";
+            textBox24.ReadOnly = true;
+            textBox24.Size = new Size(305, 21);
+            textBox24.TabIndex = 12;
+            textBox24.Text = "function _()";
+            // 
+            // label24
+            // 
+            label24.AutoSize = true;
+            label24.Location = new Point(25, 32);
+            label24.Name = "label24";
+            label24.Size = new Size(97, 15);
+            label24.TabIndex = 11;
+            label24.Text = "Plugins Directory";
+            // 
+            // textBox23
+            // 
+            textBox23.Location = new Point(128, 29);
+            textBox23.Name = "textBox23";
+            textBox23.Size = new Size(214, 23);
+            textBox23.TabIndex = 10;
+            // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Location = new Point(286, 197);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(147, 19);
+            checkBox1.TabIndex = 9;
+            checkBox1.Text = "I know what I'm about!";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Location = new Point(83, 90);
+            label23.Name = "label23";
+            label23.Size = new Size(39, 15);
+            label23.TabIndex = 8;
+            label23.Text = "Regex";
+            // 
+            // textBox22
+            // 
+            textBox22.BackColor = Color.Black;
+            textBox22.Font = new Font("Cascadia Mono", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox22.ForeColor = Color.White;
+            textBox22.Location = new Point(128, 86);
+            textBox22.Name = "textBox22";
+            textBox22.ReadOnly = true;
+            textBox22.Size = new Size(305, 21);
+            textBox22.TabIndex = 7;
+            textBox22.Text = "function\\s+_\\s*\\(\\s*\\)\\s*\\{(.*?)document\\.body\\.appendChild\\((.*?)\\);(.*?)\\}";
+            textBox22.WordWrap = false;
+            // 
+            // button14
+            // 
+            button14.Location = new Point(358, 114);
+            button14.Name = "button14";
+            button14.Size = new Size(75, 23);
+            button14.TabIndex = 6;
+            button14.Text = "Browse";
+            button14.UseVisualStyleBackColor = true;
+            button14.Click += button14_Click;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Location = new Point(549, 29);
+            label22.Name = "label22";
+            label22.Size = new Size(107, 15);
+            label22.TabIndex = 5;
+            label22.Text = "Replacement Code";
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Location = new Point(56, 146);
+            label21.Name = "label21";
+            label21.Size = new Size(66, 15);
+            label21.TabIndex = 4;
+            label21.Text = "Output File";
+            // 
+            // textBox21
+            // 
+            textBox21.Location = new Point(128, 143);
+            textBox21.Name = "textBox21";
+            textBox21.Size = new Size(305, 23);
+            textBox21.TabIndex = 3;
+            // 
+            // textBox20
+            // 
+            textBox20.Location = new Point(128, 114);
+            textBox20.Name = "textBox20";
+            textBox20.Size = new Size(214, 23);
+            textBox20.TabIndex = 2;
+            // 
+            // textBox19
+            // 
+            textBox19.BackColor = Color.Black;
+            textBox19.Font = new Font("Cascadia Mono", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox19.ForeColor = Color.White;
+            textBox19.Location = new Point(452, 47);
+            textBox19.Multiline = true;
+            textBox19.Name = "textBox19";
+            textBox19.ReadOnly = true;
+            textBox19.ScrollBars = ScrollBars.Both;
+            textBox19.Size = new Size(310, 167);
+            textBox19.TabIndex = 1;
+            textBox19.Text = "function _() {$1document.body.appendChild($2);\r\n  const fs = require('fs');\r\n  fs.writeFile('dump.js', $2.textContent, err => {\r\n    if (err) {\r\n      console.error(err);\r\n    }\r\n  });$3}";
+            textBox19.WordWrap = false;
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Location = new Point(32, 117);
+            label20.Name = "label20";
+            label20.Size = new Size(90, 15);
+            label20.TabIndex = 0;
+            label20.Text = "Target .js Plugin";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -839,6 +1087,9 @@
             tabPage6.ResumeLayout(false);
             groupBox6.ResumeLayout(false);
             groupBox6.PerformLayout();
+            tabPage7.ResumeLayout(false);
+            groupBox7.ResumeLayout(false);
+            groupBox7.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -914,5 +1165,26 @@
         private RadioButton radioButton5;
         private RadioButton radioButton4;
         private RadioButton radioButton3;
+        private TabPage tabPage7;
+        private Label label20;
+        private GroupBox groupBox7;
+        private TextBox textBox19;
+        private Button button15;
+        private Button button14;
+        private Label label22;
+        private Label label21;
+        private TextBox textBox21;
+        private TextBox textBox20;
+        private Label label23;
+        private TextBox textBox22;
+        private CheckBox checkBox1;
+        private TextBox textBox23;
+        private Button button16;
+        private Label label25;
+        private TextBox textBox24;
+        private Label label24;
+        private Button button17;
+        private Button button18;
+        private Label label26;
     }
 }

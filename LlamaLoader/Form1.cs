@@ -1,6 +1,5 @@
-using System;
+using System.Diagnostics;
 using static ModUpdater;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace LlamaLoader
 {
@@ -26,6 +25,11 @@ namespace LlamaLoader
             button11.Enabled = false;
             button12.Enabled = false;
             button13.Enabled = false;
+            button14.Enabled = false;
+            button15.Enabled = false;
+            button16.Enabled = false;
+            button17.Enabled = false;
+            button18.Enabled = false;
         }
 
         private void enableAllButtons()
@@ -43,6 +47,11 @@ namespace LlamaLoader
             button11.Enabled = true;
             button12.Enabled = true;
             button13.Enabled = true;
+            button14.Enabled = true;
+            button15.Enabled = true;
+            button16.Enabled = true;
+            button17.Enabled = true;
+            button18.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -54,6 +63,7 @@ namespace LlamaLoader
                 textBox2.Text = dlg.ResultPath;
                 textBox14.Text = Path.Combine(dlg.ResultPath, "decrypted");
                 textBox16.Text = Path.Combine(dlg.ResultPath, "decode-js");
+                textBox23.Text = Path.Combine(dlg.ResultPath, "www", "js", "plugins");
             }
         }
 
@@ -67,6 +77,7 @@ namespace LlamaLoader
                 textBox2.Text = gameDirectory;
                 textBox14.Text = Path.Combine(gameDirectory, "decrypted");
                 textBox16.Text = Path.Combine(gameDirectory, "decode-js");
+                textBox23.Text = Path.Combine(gameDirectory, "www", "js", "plugins");
             }
             else
             {
@@ -486,8 +497,8 @@ namespace LlamaLoader
         private void button11_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
-            if (result == DialogResult.OK) // Test result.
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK)
             {
                 string file = openFileDialog1.FileName;
                 try
@@ -593,7 +604,7 @@ namespace LlamaLoader
 
             disableAllButtons();
             textBox1.AppendText("Running deobfuscator in mode: " + decodeType + Environment.NewLine);
-            // Pass a lambda that appends each output line to textBox1
+
             int runDecodeJsResult = await Deobfuscator.RunDecodeJs(
                 installDirectory,
                 inputJsPath,
@@ -610,6 +621,260 @@ namespace LlamaLoader
             {
                 textBox1.AppendText("Error: Failed to deobfuscate input file." + Environment.NewLine);
             }
+            enableAllButtons();
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            DialogResult result = openFileDialog1.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                string file = openFileDialog1.FileName;
+                try
+                {
+                    textBox20.Text = file;
+                    textBox21.Text = Path.Combine(Path.GetDirectoryName(file), "modified_plugin.js");
+                }
+                catch (IOException)
+                {
+                }
+            }
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            string inputJsPath = textBox20.Text;
+            string outputJsPath = textBox21.Text;
+            string regexTarget = textBox22.Text;
+            string injectedCode = textBox19.Text;
+            if (!File.Exists(inputJsPath))
+            {
+                textBox1.AppendText("Error: Target .js file not found. Stopping." + Environment.NewLine);
+                return;
+            }
+            if (string.IsNullOrEmpty(regexTarget))
+            {
+                textBox1.AppendText("Error: Invalid or empty regex target. Stopping." + Environment.NewLine);
+                return;
+            }
+            if (string.IsNullOrEmpty(injectedCode))
+            {
+                textBox1.AppendText("Error: No code to replace the target with. Stopping." + Environment.NewLine);
+                return;
+            }
+            textBox1.AppendText("Injecting specified code to the target file..." + Environment.NewLine);
+            int injectJsResult = Extractor.InjectCode(inputJsPath, outputJsPath, regexTarget, injectedCode);
+            if (injectJsResult == 0)
+            {
+                textBox1.AppendText("Target file modified and saved to: " + outputJsPath + Environment.NewLine);
+                textBox1.AppendText("Launch the game with the modified plugin to dump obfuscated game code." + Environment.NewLine);
+            }
+            else
+            {
+                textBox1.AppendText("Error: Failed to modify the target file." + Environment.NewLine);
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked)
+            {
+                textBox19.ReadOnly = false;
+                textBox22.ReadOnly = false;
+                textBox24.ReadOnly = false;
+            }
+            else
+            {
+                textBox19.ReadOnly = true;
+                textBox22.ReadOnly = true;
+                textBox24.ReadOnly = true;
+            }
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            string pluginsDirectory = textBox23.Text;
+            string searchText = textBox24.Text;
+            if (!Directory.Exists(pluginsDirectory))
+            {
+                textBox1.AppendText("Error: Invalid plugins directory selected." + Environment.NewLine);
+                return;
+            }
+            string targetPluginPath = Extractor.FindFileWithExactMatch(pluginsDirectory, searchText);
+            if (targetPluginPath != null)
+            {
+                textBox1.AppendText("Found target function definition in: " + Path.GetFileName(targetPluginPath) + Environment.NewLine);
+            }
+            else
+            {
+                textBox1.AppendText("Error: Failed to locate the target plugin." + Environment.NewLine);
+            }
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            var dlg = new FolderPicker();
+            dlg.InputPath = @"C:\";
+            if (dlg.ShowDialog(button17.Handle) == true)
+            {
+                textBox23.Text = dlg.ResultPath;
+            }
+        }
+
+        private async void button18_Click(object sender, EventArgs e)
+        {
+            string pluginsDirectory = textBox23.Text;
+            string searchText = textBox24.Text;
+            string installDirectory = textBox16.Text;
+            if (!Directory.Exists(pluginsDirectory))
+            {
+                textBox1.AppendText("Error: Invalid plugins directory selected." + Environment.NewLine);
+                return;
+            }
+            string targetPluginPath = Extractor.FindFileWithExactMatch(pluginsDirectory, searchText);
+            textBox1.AppendText("Starting tcaLazyCracker operation. Attempting to extract and deobfuscate game code..." + Environment.NewLine);
+            if (targetPluginPath != null)
+            {
+                textBox1.AppendText("Found target function definition in: " + Path.GetFileName(targetPluginPath) + Environment.NewLine);
+            }
+            else
+            {
+                textBox1.AppendText("Error: Failed to locate the target plugin. Stopping." + Environment.NewLine);
+                return;
+            }
+            string tempJsPath = Path.Combine(Path.GetDirectoryName(targetPluginPath), "plugin_temp.js");
+
+            string decodeType = "obfuscator";
+
+            disableAllButtons();
+            textBox1.AppendText("Running deobfuscator in mode: " + decodeType + Environment.NewLine);
+
+            int runDecodeJsResult = await Deobfuscator.RunDecodeJs(
+                installDirectory,
+                targetPluginPath,
+                tempJsPath,
+                decodeType,
+                (output) => textBox1.Invoke((Action)(() => textBox1.AppendText(output + Environment.NewLine)))
+            );
+
+            if (runDecodeJsResult == 0)
+            {
+                textBox1.AppendText("Deobfuscated input file and saved output to: " + tempJsPath + Environment.NewLine);
+            }
+            else
+            {
+                textBox1.AppendText("Error: Failed to deobfuscate input file." + Environment.NewLine);
+            }
+
+            string backupPath = Path.ChangeExtension(targetPluginPath, ".bak");
+            File.Move(targetPluginPath, backupPath);
+            string regexTarget = textBox22.Text;
+            string injectedCode = textBox19.Text;
+            if (!File.Exists(tempJsPath))
+            {
+                textBox1.AppendText("Error: Target .js file not found. Stopping." + Environment.NewLine);
+                enableAllButtons();
+                return;
+            }
+            if (string.IsNullOrEmpty(regexTarget))
+            {
+                textBox1.AppendText("Error: Invalid or empty regex target. Stopping." + Environment.NewLine);
+                enableAllButtons();
+                return;
+            }
+            if (string.IsNullOrEmpty(injectedCode))
+            {
+                textBox1.AppendText("Error: No code to replace the target with. Stopping." + Environment.NewLine);
+                enableAllButtons();
+                return;
+            }
+            textBox1.AppendText("Injecting specified code to the target file..." + Environment.NewLine);
+            int injectJsResult = Extractor.InjectCode(tempJsPath, targetPluginPath, regexTarget, injectedCode);
+
+            if (injectJsResult == 0)
+            {
+                textBox1.AppendText("Target file modified and saved to: " + tempJsPath + Environment.NewLine);
+                textBox1.AppendText("Launch the game with the modified plugin to dump obfuscated game code." + Environment.NewLine);
+            }
+            else
+            {
+                textBox1.AppendText("Error: Failed to modify the target file." + Environment.NewLine);
+            }
+
+            string gameDirectory = textBox2.Text;
+            if (!Directory.Exists(gameDirectory))
+            {
+                textBox1.AppendText("Error: Game directory not found. Manually select the dump.js file after launching the game. Stopping." + Environment.NewLine);
+                enableAllButtons();
+                return;
+            }
+            textBox1.AppendText("Launching game to dump code..." + Environment.NewLine);
+
+            string gameExePath = Path.Combine(gameDirectory, "Game.exe");
+
+            ProcessStartInfo startInfo = new ProcessStartInfo
+            {
+                FileName = gameExePath,
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                WindowStyle = ProcessWindowStyle.Hidden
+            };
+
+            using (Process myProcess = Process.Start(startInfo))
+            {
+                Thread.Sleep(1000);
+                if (!myProcess.HasExited)
+                {
+                    myProcess.Kill();
+                    myProcess.WaitForExit();
+                }
+            }
+
+            textBox1.AppendText("Deobfuscating dump.js..." + Environment.NewLine);
+            string dumpJsPath = Path.Combine(gameDirectory, "dump.js");
+            if (!File.Exists(dumpJsPath))
+            {
+                textBox1.AppendText("Error: dump.js file not found. You may need to launch the game manually to obtain it. Stopping." + Environment.NewLine);
+                enableAllButtons();
+                return;
+            }
+
+            string finalResultPath = Path.Combine(gameDirectory, "final_result.js");
+
+            int runDecodeJsFinalResult = await Deobfuscator.RunDecodeJs(
+                installDirectory,
+                dumpJsPath,
+                finalResultPath,
+                decodeType,
+                (output) => textBox1.Invoke((Action)(() => textBox1.AppendText(output + Environment.NewLine)))
+            );
+
+            if (runDecodeJsFinalResult == 0)
+            {
+                textBox1.AppendText("Deobfuscated dump.js and saved result to: " + finalResultPath + Environment.NewLine);
+            }
+            else
+            {
+                textBox1.AppendText("Error: Failed to deobfuscate dump.js file. Attempting to continue..." + Environment.NewLine);
+            }
+
+            if (File.Exists(tempJsPath))
+            {
+                textBox1.AppendText("Cleaning up temp files..." + Environment.NewLine);
+                File.Delete(tempJsPath);
+            }
+
+            if (File.Exists(targetPluginPath))
+            {
+                textBox1.AppendText("Deleting modified plugin..." + Environment.NewLine);
+                File.Delete(targetPluginPath);
+            }
+
+            textBox1.AppendText("Restoring original plugin from backup: " + Path.GetDirectoryName(targetPluginPath) + Environment.NewLine);
+            File.Move(backupPath, targetPluginPath);
+
+            textBox1.AppendText("All tcaLazyCracker operations completed!" + Environment.NewLine);
             enableAllButtons();
         }
     }

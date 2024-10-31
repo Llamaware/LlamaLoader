@@ -11,7 +11,8 @@ A mod management tool, all-in-one auto-updater and installer for the [Tomb modlo
 - **Automatically** installs and updates selected Tomb-compatible mods.
 - **Update** the game engine (NW.js) to a newer SDK-enabled build. (Experimental feature, use with caution!)
 - **Decrypt** the game assets. (We're [beating](https://github.com/Llamaware/LlamaToolkit) a [dead](https://codeberg.org/basil/grimoire) [horse](https://github.com/kleineluka/burial) here.)
-- **Deobfuscate** any JavaScript code.
+- **Extract** obfuscated game code.
+- **Deobfuscate** JavaScript code.
 - A **not-so-pretty** but easy-to-use GUI.
 - **Fake** console logging.
 - Basically **zero QA testing**, so don't try putting gibberish into the input boxes.
@@ -33,7 +34,7 @@ A mod management tool, all-in-one auto-updater and installer for the [Tomb modlo
 ### Future improvements
 
 - Mod uninstallation.
-- Code extraction?
+- Automated code extraction?
 - Multiplatform? (will require a complete rewrite)
 - Use APIs instead of HTML parsing.
 - More verbose logging.
