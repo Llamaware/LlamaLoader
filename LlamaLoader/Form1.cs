@@ -1,3 +1,4 @@
+using System;
 using static ModUpdater;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -20,6 +21,11 @@ namespace LlamaLoader
             button6.Enabled = false;
             button7.Enabled = false;
             button8.Enabled = false;
+            button9.Enabled = false;
+            button10.Enabled = false;
+            button11.Enabled = false;
+            button12.Enabled = false;
+            button13.Enabled = false;
         }
 
         private void enableAllButtons()
@@ -32,6 +38,11 @@ namespace LlamaLoader
             button6.Enabled = true;
             button7.Enabled = true;
             button8.Enabled = true;
+            button9.Enabled = true;
+            button10.Enabled = true;
+            button11.Enabled = true;
+            button12.Enabled = true;
+            button13.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,6 +53,7 @@ namespace LlamaLoader
             {
                 textBox2.Text = dlg.ResultPath;
                 textBox14.Text = Path.Combine(dlg.ResultPath, "decrypted");
+                textBox16.Text = Path.Combine(dlg.ResultPath, "decode-js");
             }
         }
 
@@ -54,6 +66,7 @@ namespace LlamaLoader
                 textBox1.AppendText("Detected game directory at: " + gameDirectory + Environment.NewLine);
                 textBox2.Text = gameDirectory;
                 textBox14.Text = Path.Combine(gameDirectory, "decrypted");
+                textBox16.Text = Path.Combine(gameDirectory, "decode-js");
             }
             else
             {
@@ -460,6 +473,144 @@ namespace LlamaLoader
             {
                 textBox1.AppendText("Error: Failed to decrypt the game assets." + Environment.NewLine);
             }
+        }
+        private void button10_Click(object sender, EventArgs e)
+        {
+            var dlg = new FolderPicker();
+            dlg.InputPath = @"C:\";
+            if (dlg.ShowDialog(button1.Handle) == true)
+            {
+                textBox16.Text = dlg.ResultPath;
+            }
+        }
+        private void button11_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
+            {
+                string file = openFileDialog1.FileName;
+                try
+                {
+                    textBox17.Text = file;
+                    textBox18.Text = Path.Combine(Path.GetDirectoryName(file), "output.js");
+                }
+                catch (IOException)
+                {
+                }
+            }
+        }
+
+        private async void button12_Click(object sender, EventArgs e)
+        {
+            string decodeJsUrl = textBox15.Text;
+            string installDirectory = textBox16.Text;
+            if (string.IsNullOrEmpty(decodeJsUrl))
+            {
+                textBox1.AppendText("Error: Invalid decode-js URL. Stopping." + Environment.NewLine);
+                return;
+            }
+            if (!Directory.Exists(installDirectory))
+            {
+                textBox1.AppendText("Created new install directory." + Environment.NewLine);
+                Directory.CreateDirectory(installDirectory);
+            }
+            disableAllButtons();
+            textBox1.AppendText("Downloading and extracting decode-js..." + Environment.NewLine);
+            int decodeJsExtractResult = await Deobfuscator.DownloadAndExtractDecodeJsAsync(decodeJsUrl, installDirectory);
+            if (decodeJsExtractResult == 0)
+            {
+                textBox1.AppendText("decode-js downloaded and extracted." + Environment.NewLine);
+            }
+            else
+            {
+                textBox1.AppendText("Error: Failed to download or extract decode-js. Stopping." + Environment.NewLine);
+                enableAllButtons();
+                return;
+            }
+            textBox1.AppendText("Checking Node.js version..." + Environment.NewLine);
+            string nodeVersion = await Deobfuscator.CheckNodeVersionAsync();
+            if (nodeVersion.StartsWith("Error"))
+            {
+                textBox1.AppendText("Error: Node.js not found. Stopping." + Environment.NewLine);
+                enableAllButtons();
+                return;
+            }
+            textBox1.AppendText("Node.js " + nodeVersion + Environment.NewLine);
+            string[] versionParts = nodeVersion.Split('.');
+            int majorVersion = int.Parse(versionParts[0].TrimStart('v'));
+            if (majorVersion >= 22)
+            {
+                textBox1.AppendText("Node.js version >= 22, updating isolated-vm in package.json to v5.0..." + Environment.NewLine);
+                int updateIsolatedVmResult = Deobfuscator.UpdateIsolatedVm(installDirectory);
+                if (updateIsolatedVmResult == 0)
+                {
+                    textBox1.AppendText("isolated-vm updated." + Environment.NewLine);
+                }
+                else
+                {
+                    textBox1.AppendText("Error: Failed to update isolated-vm. Attempting to continue..." + Environment.NewLine);
+                }
+            }
+
+            textBox1.AppendText("Installing dependencies for decode-js..." + Environment.NewLine);
+
+            int decodeJsInstallResult = await Deobfuscator.InstallDecodeJs(installDirectory, (output) => textBox1.Invoke((Action)(() => textBox1.AppendText(output + Environment.NewLine))));
+
+            if (decodeJsInstallResult == 0)
+            {
+                textBox1.AppendText("Installed all dependencies. decode-js installation complete." + Environment.NewLine);
+            }
+            else
+            {
+                textBox1.AppendText("Error: Failed to install dependencies. You might need to install them manually using npm i." + Environment.NewLine);
+            }
+            enableAllButtons();
+        }
+
+        private async void button13_Click(object sender, EventArgs e)
+        {
+            string installDirectory = textBox16.Text;
+            string inputJsPath = textBox17.Text;
+            string outputJsPath = textBox18.Text;
+            if (!Directory.Exists(installDirectory))
+            {
+                textBox1.AppendText("Error: No decode-js directory selected or nonexistent directory. Stopping." + Environment.NewLine);
+                return;
+            }
+            if (!File.Exists(inputJsPath))
+            {
+                textBox1.AppendText("Error: Input .js file not found. Stopping." + Environment.NewLine);
+                return;
+            }
+
+            string decodeType = "obfuscator";
+            if (radioButton1.Checked) decodeType = "common";
+            else if (radioButton2.Checked) decodeType = "jjencode";
+            else if (radioButton3.Checked) decodeType = "sojson";
+            else if (radioButton4.Checked) decodeType = "sojsonv7";
+            else if (radioButton5.Checked) decodeType = "obfuscator";
+
+            disableAllButtons();
+            textBox1.AppendText("Running deobfuscator in mode: " + decodeType + Environment.NewLine);
+            // Pass a lambda that appends each output line to textBox1
+            int runDecodeJsResult = await Deobfuscator.RunDecodeJs(
+                installDirectory,
+                inputJsPath,
+                outputJsPath,
+                decodeType,
+                (output) => textBox1.Invoke((Action)(() => textBox1.AppendText(output + Environment.NewLine)))
+            );
+
+            if (runDecodeJsResult == 0)
+            {
+                textBox1.AppendText("Deobfuscated input file and saved output to: " + outputJsPath + Environment.NewLine);
+            }
+            else
+            {
+                textBox1.AppendText("Error: Failed to deobfuscate input file." + Environment.NewLine);
+            }
+            enableAllButtons();
         }
     }
 }

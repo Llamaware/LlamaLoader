@@ -65,13 +65,10 @@ public class NwjsUpdater
                     }
                 }
             }
-
-            return 0;
         }
         catch (Exception ex)
         {
             Console.WriteLine($"An error occurred: {ex.Message}");
-            return -1;
         }
         finally
         {
@@ -81,6 +78,7 @@ public class NwjsUpdater
                 File.Delete(tempZipPath);
             }
         }
+        return 0;
     }
 
     public static int UpdateGameExe(string gameDirectory)

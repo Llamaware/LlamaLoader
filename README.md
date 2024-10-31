@@ -11,6 +11,7 @@ A mod management tool, all-in-one auto-updater and installer for the [Tomb modlo
 - **Automatically** installs and updates selected Tomb-compatible mods.
 - **Update** the game engine (NW.js) to a newer SDK-enabled build. (Experimental feature, use with caution!)
 - **Decrypt** the game assets. (We're [beating](https://github.com/Llamaware/LlamaToolkit) a [dead](https://codeberg.org/basil/grimoire) [horse](https://github.com/kleineluka/burial) here.)
+- **Deobfuscate** any JavaScript code.
 - A **not-so-pretty** but easy-to-use GUI.
 - **Fake** console logging.
 - Basically **zero QA testing**, so don't try putting gibberish into the input boxes.
@@ -27,10 +28,12 @@ A mod management tool, all-in-one auto-updater and installer for the [Tomb modlo
 
 - OS: Only works on Windows.
 - You need the .NET 8.0 Runtime.
+- You need a `Node.js` installation to use the deobfuscator. (optional)
 
 ### Future improvements
 
 - Mod uninstallation.
+- Code extraction?
 - Multiplatform? (will require a complete rewrite)
 - Use APIs instead of HTML parsing.
 - More verbose logging.
@@ -40,4 +43,5 @@ A mod management tool, all-in-one auto-updater and installer for the [Tomb modlo
 
 LlamaLoader is licensed under the Tumbolia Public License.  
 Tomb is licensed under the MIT License.  
-[AngleSharp](https://github.com/AngleSharp/AngleSharp) is licensed under the MIT License.
+[AngleSharp](https://github.com/AngleSharp/AngleSharp) is licensed under the MIT License.  
+[decode-js](https://github.com/echo094/decode-js) is licensed under the MIT License.
