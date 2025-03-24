@@ -13,7 +13,7 @@ A mod management tool, all-in-one auto-updater and installer for the [Tomb modlo
 - **Decrypt** the game assets. (We're [beating](https://github.com/Llamaware/LlamaToolkit) a [dead](https://codeberg.org/basil/grimoire) [horse](https://github.com/kleineluka/burial) here.)
 - **Extract** obfuscated game code.
 - **Deobfuscate** JavaScript code.
-- A **not-so-pretty** but easy-to-use GUI.
+- A **not-so-pretty** but easy-to-use GUI. Now with Dark Mode!
 - **Fake** console logging.
 - Basically **zero QA testing**, so don't try putting gibberish into the input boxes.
 - It took **more than a few hours** to make this.
@@ -24,20 +24,17 @@ A mod management tool, all-in-one auto-updater and installer for the [Tomb modlo
 - Find/select your game directory, then install/update Tomb.
 - From the `Get Mods` tab, load the mod list, then install/update the mods you want.
 - Don't change the URLs or else it won't work.
+- To uninstall mods, delete them manually from the mods folder.
 
 ### Requirements
 
 - OS: Only works on Windows.
-- You need the .NET 8.0 Runtime.
+- You need the .NET 9.0 Runtime.
 - You need a `Node.js` installation to use the deobfuscator. (optional)
 
 ### Future improvements
 
 - Mod uninstallation.
-- Automated code extraction?
-- Multiplatform? (will require a complete rewrite)
-- Use APIs instead of HTML parsing.
-- More verbose logging.
 - There probably still won't be any safety features. Just don't be stupid while using it.
 
 ### License

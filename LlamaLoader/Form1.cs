@@ -30,6 +30,7 @@ namespace LlamaLoader
             button16.Enabled = false;
             button17.Enabled = false;
             button18.Enabled = false;
+            button19.Enabled = false;
         }
 
         private void enableAllButtons()
@@ -52,6 +53,7 @@ namespace LlamaLoader
             button16.Enabled = true;
             button17.Enabled = true;
             button18.Enabled = true;
+            button19.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -876,6 +878,18 @@ namespace LlamaLoader
 
             textBox1.AppendText("All tcaLazyCracker operations completed!" + Environment.NewLine);
             enableAllButtons();
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            string gameDirectory = textBox2.Text;
+            if (!Directory.Exists(gameDirectory))
+            {
+                textBox1.AppendText("Error: No game directory selected, or directory does not exist." + Environment.NewLine);
+                return;
+            }
+            textBox1.AppendText("Opening the game folder." + Environment.NewLine);
+            Process.Start("explorer.exe", gameDirectory);
         }
     }
 }

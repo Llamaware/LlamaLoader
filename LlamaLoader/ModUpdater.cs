@@ -1,4 +1,4 @@
-using AngleSharp;
+using System.Text.Json;
 
 public class ModUpdater
 {
@@ -10,58 +10,56 @@ public class ModUpdater
         public string Description { get; set; }
     }
 
+    public class ModItem
+    {
+        public ModData Data { get; set; }
+        public ModJson ModJson { get; set; }
+    }
+
+    public class ModData
+    {
+        public DateTime LastUpdate { get; set; }
+        public string Url { get; set; }
+        public string Source { get; set; }
+        public string Sha256 { get; set; }
+        public string Id { get; set; }
+    }
+
+    public class ModJson
+    {
+        public string Id { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public List<string> Authors { get; set; }
+        public string Version { get; set; }
+    }
+
+
     public static async Task<List<Mod>> ParseModsFromPage(string url)
     {
         var mods = new List<Mod>();
 
         using (HttpClient client = new HttpClient())
         {
-            string htmlContent = await client.GetStringAsync(url);
+            // Get the JSON content from the given URL.
+            string jsonContent = await client.GetStringAsync(url);
 
-            // Configure AngleSharp
-            var config = Configuration.Default.WithDefaultLoader();
-            var context = BrowsingContext.New(config);
+            // Deserialize the JSON into a list of ModItem objects.
+            // Notice the case-insensitivity so it matches our JSON keys even though our C# properties are PascalCase.
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
+            var modItems = JsonSerializer.Deserialize<List<ModItem>>(jsonContent, options);
 
-            // Load HTML document
-            var document = await context.OpenAsync(req => req.Content(htmlContent));
-
-            // Select each mod article
-            var modArticles = document.QuerySelectorAll("article.mod");
-
-            foreach (var article in modArticles)
+            // Loop through each item and add it to the mods list.
+            if (modItems != null)
             {
-                // Attempt to retrieve the mod name
-                var nameElement = article.QuerySelector("h1 a");
-                var name = nameElement?.TextContent.Trim() ?? "Unnamed Mod";
-
-                // Attempt to retrieve the version
-                var versionElement = article.QuerySelector("h1 .version");
-                var version = versionElement?.TextContent.Trim() ?? "No Version";
-
-                // Attempt to retrieve the description
-                var descriptionElement = article.QuerySelector("p");
-                var description = descriptionElement?.TextContent.Trim() ?? "No Description";
-
-                // Attempt to retrieve the download URL specifically from the "links" div
-                var linksDiv = article.QuerySelector("div.links");
-                // Check for any <a> tags with href containing ".zip"
-                var downloadLink = linksDiv?.QuerySelector("a.link")?.GetAttribute("href");
-                if (!string.IsNullOrEmpty(downloadLink) && downloadLink.Contains(".zip"))
+                foreach (var item in modItems)
                 {
-                    // Ensure the link is fully qualified if it's a relative path
-                    if (!downloadLink.StartsWith("http"))
-                    {
-                        var baseUri = new Uri(url);
-                        downloadLink = new Uri(baseUri, downloadLink).ToString();
-                    }
-
-                    // Create a new Mod object and add it to the list
                     mods.Add(new Mod
                     {
-                        Name = name,
-                        Version = version,
-                        Description = description,
-                        Url = downloadLink
+                        Name = item.ModJson?.Name ?? "Unnamed Mod",
+                        Version = item.ModJson?.Version ?? "No Version",
+                        Description = item.ModJson?.Description ?? "No Description",
+                        Url = item.Data?.Url // This is where the download URL comes from.
                     });
                 }
             }

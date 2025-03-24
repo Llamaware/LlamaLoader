@@ -119,6 +119,7 @@
             textBox20 = new TextBox();
             textBox19 = new TextBox();
             label20 = new Label();
+            button19 = new Button();
             groupBox1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -138,7 +139,7 @@
             // 
             // textBox1
             // 
-            textBox1.BackColor = SystemColors.WindowText;
+            textBox1.BackColor = Color.Black;
             textBox1.Font = new Font("Cascadia Mono", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
             textBox1.ForeColor = Color.White;
             textBox1.Location = new Point(7, 12);
@@ -151,12 +152,13 @@
             // 
             // button1
             // 
+            button1.BackColor = SystemColors.ButtonFace;
             button1.Location = new Point(667, 33);
             button1.Name = "button1";
             button1.Size = new Size(75, 23);
             button1.TabIndex = 1;
             button1.Text = "Browse";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
             // textBox2
@@ -208,22 +210,24 @@
             // 
             // button2
             // 
-            button2.Location = new Point(130, 180);
+            button2.BackColor = SystemColors.ButtonFace;
+            button2.Location = new Point(69, 180);
             button2.Name = "button2";
             button2.Size = new Size(190, 40);
             button2.TabIndex = 4;
             button2.Text = "Auto-Detect Game";
-            button2.UseVisualStyleBackColor = true;
+            button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
             // button3
             // 
-            button3.Location = new Point(470, 180);
+            button3.BackColor = SystemColors.ButtonFace;
+            button3.Location = new Point(530, 180);
             button3.Name = "button3";
             button3.Size = new Size(190, 40);
             button3.TabIndex = 5;
             button3.Text = "Install/Update Modloader";
-            button3.UseVisualStyleBackColor = true;
+            button3.UseVisualStyleBackColor = false;
             button3.Click += button3_Click;
             // 
             // tabControl1
@@ -243,6 +247,8 @@
             // 
             // tabPage1
             // 
+            tabPage1.BackColor = SystemColors.ControlLightLight;
+            tabPage1.Controls.Add(button19);
             tabPage1.Controls.Add(button3);
             tabPage1.Controls.Add(groupBox1);
             tabPage1.Controls.Add(button2);
@@ -252,10 +258,10 @@
             tabPage1.Size = new Size(780, 296);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Modloader";
-            tabPage1.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            tabPage2.BackColor = SystemColors.ControlLightLight;
             tabPage2.Controls.Add(groupBox2);
             tabPage2.Controls.Add(button5);
             tabPage2.Controls.Add(button4);
@@ -265,7 +271,6 @@
             tabPage2.Size = new Size(780, 296);
             tabPage2.TabIndex = 1;
             tabPage2.Text = "Get Mods";
-            tabPage2.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -282,6 +287,8 @@
             // 
             // textBox5
             // 
+            textBox5.BackColor = SystemColors.ControlLightLight;
+            textBox5.ForeColor = SystemColors.ControlText;
             textBox5.Location = new Point(403, 72);
             textBox5.Multiline = true;
             textBox5.Name = "textBox5";
@@ -305,7 +312,7 @@
             textBox4.Name = "textBox4";
             textBox4.Size = new Size(529, 23);
             textBox4.TabIndex = 1;
-            textBox4.Text = "https://llamawa.re/mods/";
+            textBox4.Text = "https://llamawa.re/repo.json";
             // 
             // checkedListBox1
             // 
@@ -319,26 +326,29 @@
             // 
             // button5
             // 
+            button5.BackColor = SystemColors.ButtonFace;
             button5.Location = new Point(465, 239);
             button5.Name = "button5";
             button5.Size = new Size(190, 40);
             button5.TabIndex = 4;
             button5.Text = "Install/Update Selected Mods";
-            button5.UseVisualStyleBackColor = true;
+            button5.UseVisualStyleBackColor = false;
             button5.Click += button5_Click;
             // 
             // button4
             // 
+            button4.BackColor = SystemColors.ButtonFace;
             button4.Location = new Point(125, 239);
             button4.Name = "button4";
             button4.Size = new Size(190, 40);
             button4.TabIndex = 3;
             button4.Text = "Load Mod List";
-            button4.UseVisualStyleBackColor = true;
+            button4.UseVisualStyleBackColor = false;
             button4.Click += button4_Click;
             // 
             // tabPage3
             // 
+            tabPage3.BackColor = SystemColors.ControlLightLight;
             tabPage3.Controls.Add(button6);
             tabPage3.Controls.Add(groupBox3);
             tabPage3.Location = new Point(4, 24);
@@ -346,16 +356,16 @@
             tabPage3.Size = new Size(780, 296);
             tabPage3.TabIndex = 2;
             tabPage3.Text = "NW.js (32-bit)";
-            tabPage3.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
+            button6.BackColor = SystemColors.ButtonFace;
             button6.Location = new Point(290, 238);
             button6.Name = "button6";
             button6.Size = new Size(190, 40);
             button6.TabIndex = 1;
             button6.Text = "Upgrade NW.js (32-bit)";
-            button6.UseVisualStyleBackColor = true;
+            button6.UseVisualStyleBackColor = false;
             button6.Click += button6_Click;
             // 
             // groupBox3
@@ -456,6 +466,7 @@
             // 
             // tabPage4
             // 
+            tabPage4.BackColor = SystemColors.ControlLightLight;
             tabPage4.Controls.Add(button7);
             tabPage4.Controls.Add(groupBox4);
             tabPage4.Location = new Point(4, 24);
@@ -463,16 +474,16 @@
             tabPage4.Size = new Size(780, 296);
             tabPage4.TabIndex = 3;
             tabPage4.Text = "NW.js (64-bit)";
-            tabPage4.UseVisualStyleBackColor = true;
             // 
             // button7
             // 
+            button7.BackColor = SystemColors.ButtonFace;
             button7.Location = new Point(290, 238);
             button7.Name = "button7";
             button7.Size = new Size(190, 40);
             button7.TabIndex = 1;
             button7.Text = "Upgrade NW.js (64-bit)";
-            button7.UseVisualStyleBackColor = true;
+            button7.UseVisualStyleBackColor = false;
             button7.Click += button7_Click;
             // 
             // groupBox4
@@ -488,7 +499,7 @@
             groupBox4.Controls.Add(label7);
             groupBox4.Location = new Point(6, 3);
             groupBox4.Name = "groupBox4";
-            groupBox4.Size = new Size(768, 212);
+            groupBox4.Size = new Size(768, 216);
             groupBox4.TabIndex = 0;
             groupBox4.TabStop = false;
             groupBox4.Text = "Options";
@@ -573,6 +584,7 @@
             // 
             // tabPage5
             // 
+            tabPage5.BackColor = SystemColors.ControlLightLight;
             tabPage5.Controls.Add(button8);
             tabPage5.Controls.Add(groupBox5);
             tabPage5.Location = new Point(4, 24);
@@ -581,16 +593,16 @@
             tabPage5.Size = new Size(780, 296);
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Decrypt";
-            tabPage5.UseVisualStyleBackColor = true;
             // 
             // button8
             // 
+            button8.BackColor = SystemColors.ButtonFace;
             button8.Location = new Point(290, 147);
             button8.Name = "button8";
             button8.Size = new Size(190, 40);
             button8.TabIndex = 1;
             button8.Text = "Decrypt Assets";
-            button8.UseVisualStyleBackColor = true;
+            button8.UseVisualStyleBackColor = false;
             button8.Click += button8_Click;
             // 
             // groupBox5
@@ -607,12 +619,13 @@
             // 
             // button9
             // 
+            button9.BackColor = SystemColors.ButtonFace;
             button9.Location = new Point(639, 48);
             button9.Name = "button9";
             button9.Size = new Size(75, 23);
             button9.TabIndex = 2;
             button9.Text = "Browse";
-            button9.UseVisualStyleBackColor = true;
+            button9.UseVisualStyleBackColor = false;
             button9.Click += button9_Click;
             // 
             // label14
@@ -633,6 +646,7 @@
             // 
             // tabPage6
             // 
+            tabPage6.BackColor = SystemColors.ControlLightLight;
             tabPage6.Controls.Add(button13);
             tabPage6.Controls.Add(button12);
             tabPage6.Controls.Add(groupBox6);
@@ -641,26 +655,27 @@
             tabPage6.Size = new Size(780, 296);
             tabPage6.TabIndex = 5;
             tabPage6.Text = "Deobfuscate";
-            tabPage6.UseVisualStyleBackColor = true;
             // 
             // button13
             // 
+            button13.BackColor = SystemColors.ButtonFace;
             button13.Location = new Point(465, 239);
             button13.Name = "button13";
             button13.Size = new Size(190, 40);
             button13.TabIndex = 3;
             button13.Text = "Deobfuscate File";
-            button13.UseVisualStyleBackColor = true;
+            button13.UseVisualStyleBackColor = false;
             button13.Click += button13_Click;
             // 
             // button12
             // 
+            button12.BackColor = SystemColors.ButtonFace;
             button12.Location = new Point(125, 239);
             button12.Name = "button12";
             button12.Size = new Size(190, 40);
             button12.TabIndex = 2;
             button12.Text = "Install decode-js";
-            button12.UseVisualStyleBackColor = true;
+            button12.UseVisualStyleBackColor = false;
             button12.Click += button12_Click;
             // 
             // groupBox6
@@ -751,22 +766,24 @@
             // 
             // button11
             // 
+            button11.BackColor = SystemColors.ButtonFace;
             button11.Location = new Point(653, 89);
             button11.Name = "button11";
             button11.Size = new Size(75, 23);
             button11.TabIndex = 9;
             button11.Text = "Browse";
-            button11.UseVisualStyleBackColor = true;
+            button11.UseVisualStyleBackColor = false;
             button11.Click += button11_Click;
             // 
             // button10
             // 
+            button10.BackColor = SystemColors.ButtonFace;
             button10.Location = new Point(653, 59);
             button10.Name = "button10";
             button10.Size = new Size(75, 23);
             button10.TabIndex = 8;
             button10.Text = "Browse";
-            button10.UseVisualStyleBackColor = true;
+            button10.UseVisualStyleBackColor = false;
             button10.Click += button10_Click;
             // 
             // label18
@@ -836,6 +853,7 @@
             // 
             // tabPage7
             // 
+            tabPage7.BackColor = SystemColors.ControlLightLight;
             tabPage7.Controls.Add(button18);
             tabPage7.Controls.Add(button16);
             tabPage7.Controls.Add(button15);
@@ -845,36 +863,38 @@
             tabPage7.Size = new Size(780, 296);
             tabPage7.TabIndex = 6;
             tabPage7.Text = "Extract Code";
-            tabPage7.UseVisualStyleBackColor = true;
             // 
             // button18
             // 
+            button18.BackColor = SystemColors.ButtonFace;
             button18.Location = new Point(528, 243);
             button18.Name = "button18";
             button18.Size = new Size(190, 40);
             button18.TabIndex = 4;
             button18.Text = "tcaLazyCracker";
-            button18.UseVisualStyleBackColor = true;
+            button18.UseVisualStyleBackColor = false;
             button18.Click += button18_Click;
             // 
             // button16
             // 
+            button16.BackColor = SystemColors.ButtonFace;
             button16.Location = new Point(60, 243);
             button16.Name = "button16";
             button16.Size = new Size(190, 40);
             button16.TabIndex = 3;
             button16.Text = "Locate Target Plugin";
-            button16.UseVisualStyleBackColor = true;
+            button16.UseVisualStyleBackColor = false;
             button16.Click += button16_Click;
             // 
             // button15
             // 
+            button15.BackColor = SystemColors.ButtonFace;
             button15.Location = new Point(296, 243);
             button15.Name = "button15";
             button15.Size = new Size(190, 40);
             button15.TabIndex = 2;
             button15.Text = "Modify Plugin";
-            button15.UseVisualStyleBackColor = true;
+            button15.UseVisualStyleBackColor = false;
             button15.Click += button15_Click;
             // 
             // groupBox7
@@ -914,12 +934,13 @@
             // 
             // button17
             // 
+            button17.BackColor = SystemColors.ButtonFace;
             button17.Location = new Point(358, 29);
             button17.Name = "button17";
             button17.Size = new Size(75, 23);
             button17.TabIndex = 14;
             button17.Text = "Browse";
-            button17.UseVisualStyleBackColor = true;
+            button17.UseVisualStyleBackColor = false;
             button17.Click += button17_Click;
             // 
             // label25
@@ -994,12 +1015,13 @@
             // 
             // button14
             // 
+            button14.BackColor = SystemColors.ButtonFace;
             button14.Location = new Point(358, 114);
             button14.Name = "button14";
             button14.Size = new Size(75, 23);
             button14.TabIndex = 6;
             button14.Text = "Browse";
-            button14.UseVisualStyleBackColor = true;
+            button14.UseVisualStyleBackColor = false;
             button14.Click += button14_Click;
             // 
             // label22
@@ -1057,6 +1079,17 @@
             label20.Size = new Size(90, 15);
             label20.TabIndex = 0;
             label20.Text = "Target .js Plugin";
+            // 
+            // button19
+            // 
+            button19.BackColor = SystemColors.ButtonFace;
+            button19.Location = new Point(302, 180);
+            button19.Name = "button19";
+            button19.Size = new Size(190, 40);
+            button19.TabIndex = 6;
+            button19.Text = "Open Game Directory";
+            button19.UseVisualStyleBackColor = false;
+            button19.Click += button19_Click;
             // 
             // Form1
             // 
@@ -1186,5 +1219,6 @@
         private Button button17;
         private Button button18;
         private Label label26;
+        private Button button19;
     }
 }
